@@ -30,7 +30,7 @@ public class YoilTeller {
 		int mm = Integer.parseInt(month);
 		int dd = Integer.parseInt(day);
 		
-		//2. 작업 - 날짜 셋팅
+		//2. 처리작업 - 날짜 셋팅
 		Calendar cal = Calendar.getInstance();
 		cal.set(yyyy, mm - 1, dd);
 		
@@ -48,8 +48,17 @@ public class YoilTeller {
 												//response.getWriter()는 예외 처리를 해주어야 하는데
 												//지금은 일단 던지겠다.
 		
+		out.println("<html>");
+		out.println("<head>");
+		out.println("</head>");
+		out.println("<body>");
 		out.println(year + "년 " + month + "월 " + day + "일은 ");
 		out.println(yoil + "요일 입니다.");
+		out.println("</body>");
+		out.println("</html>");
 	}
-
+	/*
+	 * 현재 이 코드는 하나의 메서드 안에 3개의 관심사(입력, 처리, 출력)가 동시에 구현되고 있다.
+	 * 우리는 이 관심사들을 분리해줄 필요가 있다.
+	 * */
 }

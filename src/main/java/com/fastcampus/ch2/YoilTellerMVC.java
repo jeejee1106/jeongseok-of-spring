@@ -46,4 +46,9 @@ public class YoilTellerMVC {
 		return "일월화수목금토".charAt(dayOfWeek); //숫자를 다시 문자로 바꿔준다.
 	}
 
+	/*
+	 * 반환타입에 따라 jsp파일로 정보를 보내주는 세가지 방법이 있다.
+	 * 
+	 * */
+	
 }
