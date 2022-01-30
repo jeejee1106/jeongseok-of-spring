@@ -45,10 +45,4 @@ public class YoilTellerMVC {
 		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); //숫자로 출력됨. 1=일, 2=월, 3=화 ...
 		return "일월화수목금토".charAt(dayOfWeek); //숫자를 다시 문자로 바꿔준다.
 	}
-
-	/*
-	 * 반환타입에 따라 jsp파일로 정보를 보내주는 세가지 방법이 있다.
-	 * 
-	 * */
-	
 }
