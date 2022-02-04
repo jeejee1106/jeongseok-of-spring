@@ -5,42 +5,56 @@
 //
 //import org.springframework.stereotype.Controller;
 //import org.springframework.ui.Model;
+//import org.springframework.validation.BindingResult;
+//import org.springframework.validation.FieldError;
 //import org.springframework.web.bind.annotation.ExceptionHandler;
+//import org.springframework.web.bind.annotation.ModelAttribute;
 //import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
 //
-////YoilTellerMVC + @RequestParam을 설정하고, 예외 처리를 하는 예제!
+////YoilTellerMVC2 + 예제!
 //@Controller
-//public class YoilTellerMVC2 {
+//public class YoilTellerMVC6 {
 //	
 //	@ExceptionHandler(Exception.class)
-//	public String catcher(Exception e) {
-//		e.printStackTrace(); //어떤 예외인지 찍어 볼 수 있는 메서드
+//	public String catcher(Exception e, BindingResult result) {
+//		System.out.println("result = " + result);
+//		
+//		FieldError error = result.getFieldError();
+//		System.out.println("Code = " + error.getCode());
+//		System.out.println("Field = " + error.getField());
+//		System.out.println("DefaultMessage = " + error.getDefaultMessage());
+//		
+//		e.printStackTrace();
 //		return "yoilError";
 //	}
 //	
-//	@RequestMapping("/getYoilMVC2")
-//	public String main(@RequestParam(required=true) int year, 
-//						@RequestParam(required=true) int month, 
-//						@RequestParam(required=true) int day, Model model) throws IOException {
+//	@RequestMapping("/getYoilMVC6")
+//	public String main(MyDate date, BindingResult result) throws IOException {
+//		System.out.println("result = " + result);
 //
 //		//1. 유효성 검사
-//		if(!isValid(year, month, day)) {
+//		if(!isValid(date)) {
 //			return "yoilError"; //년, 월, 일이 유효하지 않으면 WEB-INF/views/yoilError.jsp를 보여주겠다!
 //		}
 //		
-//		//2. 요일 계산
-//		char yoil = getYoil(year, month, day);
+//		//2. 처리 - 요일 계산
+////		char yoil = getYoil(date);
 //		
 //		//3. 계산한 결과를 model에 저장
-//		model.addAttribute("year", year);
-//		model.addAttribute("month", month);
-//		model.addAttribute("day", day);
-//		model.addAttribute("yoil", yoil);
+////		model.addAttribute("myDate", date);
+////		model.addAttribute("yoil", yoil);
 //		
 //		return "yoil"; // /WEB-INF/views/yoil.jsp를 이용해서 결과물을 보여주겠다 라는 뜻!
 //					   // 근데 경로와 확장자 부분은 매번 똑같으니까 공통된 부분은 빼고 view이름만 적도록 하는 것!
 //		
+//	}
+//
+//	private boolean isValid(MyDate date) {
+//		return isValid(date.getYear(), date.getMonth(), date.getDay());
+//	}
+//
+//	private @ModelAttribute("yoil") char getYoil(MyDate date) {
+//		return getYoil(date.getYear(), date.getMonth(), date.getDay());
 //	}
 //
 //	private boolean isValid(int year, int month, int day) {

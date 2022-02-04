@@ -79,7 +79,7 @@ public class RequestParamTest {
 	}
 
 	@RequestMapping("/requestParam8") 
-	public String main8(@RequestParam(required=false) int year) {   
+	public String main8(@RequestParam(required=false, defaultValue = "2021") int year) {   
 	//	http://localhost/ch2/requestParam8        ---->> 500 java.lang.IllegalStateException: Optional int parameter 'year' is present but cannot be translated into a null value due to being declared as a primitive type. Consider declaring it as object wrapper for the corresponding primitive type.
 	//	http://localhost/ch2/requestParam8?year   ---->> 400 Bad Request, nested exception is java.lang.NumberFormatException: For input string: "" 
 	//  파라미터가 int이기 때문에 String예제와는 다르게 에러가 난다. 빈 문자열""은 int로 바꿔줄 수 없기 때문이다.
