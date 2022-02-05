@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RequestParamTest {
-	@ExceptionHandler(Exception.class)
+	
+	@ExceptionHandler(Exception.class) //@ExceptionHandler는 (  ) 안의 예외가 발생했을 때 메서드를 호출한다!
 	public String catcher(Exception e) {
 		return "yoilError";
 	}

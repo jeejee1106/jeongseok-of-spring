@@ -17,6 +17,7 @@ public class YoilTeller {
 //	public static void main(String[] args) {
 	@RequestMapping("/getYoil")
 	public void main(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//서버에서 파라미터를 안주면 500에러가 뜬다.
 		//HttpServletRequest : 서버에서 파라미터를 받겠다.
 		//HttpServletResponse : 브라우저에 출력 할 때!
 		
