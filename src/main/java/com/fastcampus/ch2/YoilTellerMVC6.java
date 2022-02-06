@@ -31,6 +31,7 @@ public class YoilTellerMVC6 {
 	@RequestMapping("/getYoilMVC6")
 	public String main(MyDate date, BindingResult result) throws IOException {
 		System.out.println("result = " + result);
+		//파라미터값을 똑바로 주면 500에러나고, 문자열로 줘야 yoilError페이지로 이동함.. 이제 맞나?
 
 		//1. 유효성 검사
 		if(!isValid(date)) {
