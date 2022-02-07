@@ -17,24 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller  //1. 스프링 프로젝트를 생성하면 이렇게 자동으로 원격 호출이 가능한 프로그램으로 등록이 되어 있다.
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	//2. URL과 메서드 연결(맵핑, mapping)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	public String home() {
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+		return "index";
 	}
 	
 }

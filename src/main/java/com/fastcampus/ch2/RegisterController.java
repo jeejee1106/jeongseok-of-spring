@@ -7,21 +7,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class RegisterController {
 
-//	@RequestMapping("/register/add") //(value="/register/add", method={RequestMethod.GET, RequestMethod.POST}) 이 생략되어 있는 것! GET과 POST 둘 다 허용하겠다.
+//	@RequestMapping("/register/add") //(value="/register/add", method={RequestMethod.GET, RequestMethod.POST}) 이 생략되어 있는 것! GET과 POST 둘 다 허용하겠다. 아래와 동일한 코드
+	@RequestMapping(value="/register/add", method={RequestMethod.GET, RequestMethod.POST}) 
 //	@GetMapping("/register/add")
-//	public String register() {
-//		return "registerForm";
-//	}
+	public String register() {
+		return "registerForm";
+	}
 	/*
 	 * 사실 위 메서드는 매핑 연결만 해줄 뿐 별다른 기능이 없는 메서드이다.
 	 * 이런 메서드들은 servlet-context.xml파일에 
 	 * <view-controller path="/register/add" view-name="registerForm"/>
 	 * 이렇게 한 줄을 추가해주면 위 네줄을 안쓰고도 같은 기능을 하게 만들 수 있다.
 	 * view-controller는 get요청만 허락한다!
+	 * 둘 중 하나만 써야함. 둘 중 하나는 꼭 주석하기!
 	 * */
 	
 
@@ -36,13 +39,13 @@ public class RegisterController {
 			
 			//위 msg를 모델로 보내는 방법도 있다.
 			m.addAttribute("msg", msg);
-			return "redirect:/register/add";
+			return "forward:/register/add";
 		}
 		
 		return "registerInfo";
 	}
 
 	private boolean isValid(User user) {
-		return true;
+		return false;
 	}
 }
