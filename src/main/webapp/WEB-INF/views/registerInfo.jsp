@@ -11,6 +11,7 @@
 		<h1>name=${user.name}</h1>
 		<h1>email=${user.email}</h1>
 		<h1>birth=${user.birth}</h1>
+		<h1>hobby=${user.hobby}</h1>
 		<h1>sns=${user.sns}</h1>
 		<!-- registerForm.html에서 보내는 name값이 모두 sns이다. 즉 같은 name값이 여러개이다. -->
 		<!-- 그럴 떈 paramValues라는 배열에 담아서 출력해주어야 한다. -->

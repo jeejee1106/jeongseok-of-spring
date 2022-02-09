@@ -1,19 +1,34 @@
 package com.fastcampus.ch2;
 
 import java.net.URLEncoder;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/register")
 public class RegisterController {
+	
+	@InitBinder
+	public void toDate(WebDataBinder binder) {
+//		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//		binder.registerCustomEditor(Date.class, new CustomDateEditor(df, false));
+		binder.registerCustomEditor(String[].class, new StringArrayPropertyEditor("#")); //스프링이 제공하는 기능. 문자열 잘라서 배열에 넣기
+	}
 
 //	@RequestMapping("/register/add") //(value="/register/add", method={RequestMethod.GET, RequestMethod.POST}) 이 생략되어 있는 것! GET과 POST 둘 다 허용하겠다. 아래와 동일한 코드
-	@RequestMapping(value="/register/add", method={RequestMethod.GET, RequestMethod.POST}) 
+	@RequestMapping(value="/add", method={RequestMethod.GET, RequestMethod.POST}) 
 //	@GetMapping("/register/add")
 	public String register() {
 		return "registerForm";
@@ -29,8 +44,10 @@ public class RegisterController {
 	
 
 //	@RequestMapping(value="/register/save", method=RequestMethod.POST) //아래와 동일한 코드!
-	@PostMapping("/register/save") //PostMapping, GetMapping 어노태이션은 스프링 4.3부터!!
-	public String save(User user, Model m) throws Exception{
+	@PostMapping("/save") //PostMapping, GetMapping 어노태이션은 스프링 4.3부터!!
+	public String save(User user, BindingResult result, Model m) throws Exception{
+		System.out.println("result = " + result);
+		System.out.println("user = " + user);
 		//1. 유효성 검사
 		if(!isValid(user)) {
 			String msg = URLEncoder.encode("id를 잘못 입력하셨습니다.", "utf-8");
@@ -46,6 +63,6 @@ public class RegisterController {
 	}
 
 	private boolean isValid(User user) {
-		return false;
+		return true;
 	}
 }
