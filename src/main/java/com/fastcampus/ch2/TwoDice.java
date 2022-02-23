@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TwoDice {
 	@RequestMapping("/rollDice")
 	public void main(HttpServletResponse response) throws IOException {
+		//서버에서 받을 정보가 딱히 없는 예제이이기 때문에 request는 필요없다.
 		int idx1 = (int)(Math.random()*6) + 1;
 		int idx2 = (int)(Math.random()*6) + 1;
 		

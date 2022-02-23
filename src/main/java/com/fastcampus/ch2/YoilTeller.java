@@ -22,8 +22,8 @@ public class YoilTeller {
 	@RequestMapping("/getYoil")
 	public void main(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		//서버에서 파라미터를 안주면 500에러가 뜬다.
-		//HttpServletRequest : 서버에서 파라미터를 받겠다.
-		//HttpServletResponse : 브라우저에 출력 할 때!
+		//HttpServletRequest : 서버가 주는 정보를 이 파라미터로 받겠다.
+		//HttpServletResponse : 브라우저에 출력 할 때 response를 이용해서 출력한다. 매개변수로 적기만 하면 톰캣이 아 너가 필요하구나?하고 알아서 준다.
 		
 		//1. 입력
 		String year = request.getParameter("year"); //파라미터는 웹(서버)에서 넘겨준다
@@ -39,8 +39,8 @@ public class YoilTeller {
 		Calendar cal = Calendar.getInstance();
 		cal.set(yyyy, mm - 1, dd);
 		
-		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); //숫자로 출력됨. 1=일, 2=월, 3=화 ...
-		char yoil = "일월화수목금토".charAt(dayOfWeek); //숫자를 다시 문자로 바꿔준다.
+		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); //요일이 숫자로 출력됨. 1=일, 2=월, 3=화 ...
+		char yoil = " 일월화수목금토".charAt(dayOfWeek); //숫자를 다시 문자로 바꿔준다.
 		
 		//3-1. 콘솔에 출력
 //		System.out.println(year + "년 " + month + "월 " + day + "일은 ");
