@@ -30,6 +30,7 @@ Context안에는 서블릿이 있다. 서블릿이란 작은 서버 프로그램
 - web.xml
 : Tomcat의 공통설정 파일과 개인 설정 파일 두 개가 있다.
 
+<br>
 
 ## HTTP 요청과 응답
 
@@ -57,3 +58,14 @@ Context안에는 서블릿이 있다. 서블릿이란 작은 서버 프로그램
     - 데이터를 요청 메시지의 body에 담아서 전송
     - 보안에 유리, 데이터 공유에는 불리
     - ex) 게시판에 글쓰기, 로그인, 회원가입
+
+<br>
+
+## 관심사의 분리 (MVC 패턴)
+
+**MVC 패턴**이란?  
+**M**odel : Controller와 View 사이에서 데이터를 전달해 주는 역할을 한다.  
+**V**iew : Controller에서 처리한 데이터를 Model을 통해 전달 받고, 이 데이터를 화면에 출력해주는 역할을 한다.  
+**C**ontroller : 사용자의 요청이 들어오면 사용자가 원하는 데이터를 Model에 담아 보내는 역할을 한다.  
+
+**참고 : Model은 DispatcherServlet이 생성해서 Controller에 넘겨주는데, DispatcherServlet은 뒤에서 자세하게 다룰 예정.
