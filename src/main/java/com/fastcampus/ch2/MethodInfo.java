@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.StringJoiner;
 
+//특정 클래스의 메서드 정보를 보기위한 클래스. 이런게 있구나 알아두기
 public class MethodInfo {
 	public static void main(String[] args) throws Exception{
 

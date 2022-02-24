@@ -19,12 +19,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.ui.Model;
 import org.springframework.validation.support.BindingAwareModelMap;
 
-//@WebServlet = @Controller + @RequestMapping
+//@WebServlet = 스프링의 @Controller + @RequestMapping
+//서블릿에서는 클래스 단위로만 매핑이 된다. 그래서 서블릿은 스프링에 비해서 클래스를 많이 만들어야 하는 단점이 있다.
+// 또한 서블릿은 HttpServlet을 상속 받아야 사용 가능하며, 메서드 이름이 꼭 service여야하고, HttpServletRequest와 HttpServletResponse를 매개변수로 받아야 한다. 항상 고정!!
+// 내 생각 : 상속받은 HttpServlet의 service 메서드를 오버라이드 하는 것 같다!
+//이 어노테이션을 사용하기 위해선 tomcat이 가지고 있는 라이브러리를 넣어줘야 한다. (강의 2-12 22분쯤 참고)
 @WebServlet("/myDispatcherServlet")  // http://localhost/ch2/myDispatcherServlet?year=2021&month=10&day=1
 public class MyDispatcherServlet extends HttpServlet { //서블릿은 반드시 HttpServlet를 상속 받아야하고
 	@Override	//메서드 이름은 꼭 service, 매개변수는 HttpServletRequest, HttpServletResponse 이 두개를 적어줘야한다. 고정임!!
 	public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Map    map = request.getParameterMap();
+		Map    map = request.getParameterMap(); //request로 받은 값들을 key, value의 형태로 맵에 넣는다. 현재 key에는 "year", "month", "day"가, value에는 "2022", "2", "24"가 들어있다. (내가 쿼리 스트링에 넣어준 값대로)
 		Model  model = null;
 		String viewName = "";
 		
@@ -53,7 +57,7 @@ public class MyDispatcherServlet extends HttpServlet { //서블릿은 반드시 HttpSer
 					argArr[i] = response;					
 				} else if(value != null) {  // map에 paramName이 있으면,
 					// value와 parameter의 타입을 비교해서, 다르면 변환해서 저장 
-					String strValue = ((String[])value)[0];	// getParameterMap()에서 꺼낸 value는 String배열이므로 변환 필요 
+					String strValue = ((String[])value)[0];	// getParameterMap()에서 꺼낸 value는 사실 String배열이므로 변환 필요
 					argArr[i] = convertTo(strValue, paramType);				
 				} 
 			}

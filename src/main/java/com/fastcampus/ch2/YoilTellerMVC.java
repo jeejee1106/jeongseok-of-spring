@@ -18,6 +18,14 @@ public class YoilTellerMVC {
 	
 	@RequestMapping("/getYoilMVC")
 	public String main(int year, int month, int day, Model model) throws IOException {
+		/**
+		 * HttpServletRequest로 데이터를 받는 대신, 직접 year, month, day를 받을 수 있다.
+		 * 이 때 String이 아닌 int 타입으로 받을 수 있는데, 쿼리스트링의 String타입을 DispatcherServlet이 자동으로 int타입으로 변환해주기 때문이다.
+		 * 
+		 * 또한 Model에 데이터를 담아 view에 보내야하기 때문에 HttpServletResponse도 필요가 업고, Model객체를 받아준다.
+		 * Model또한 DispatcherServlet이 만들어서 Controller에 보내준다!
+		 */
+		
 		
 		//현재는 isValid를 true로 놨을 때 파라미터를 안넘기면 500에러(서버에러) 남
 		//why? getYoilMVC2 예제부터 배울거지만, 현재는 파라미터가 필수 입력이 아닌 상태다(required=false).
@@ -39,7 +47,8 @@ public class YoilTellerMVC {
 		model.addAttribute("day", day);
 		model.addAttribute("yoil", yoil);
 		
-		return "yoil";
+		return "yoil"; //view의 경로 반환
+					   //servlet-context.xml파일에 prefix(접두사 : /WEB-INF/views/)와 suffix를(접미사 : .jsp) 이용해 view의 경로를 지정한다.
 		
 	}
 
