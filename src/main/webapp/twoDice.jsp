@@ -16,7 +16,8 @@
 	<title>twoDice.jsp</title>
 </head>
 <body>
-	<%-- 이 파일은 매핑이 없어도 주소창에 twoDice.jsp를 입력하면 호출이 된다... 뭐지...? --%>
+	<%-- jsp페이지는 따로 WebServlet에서 매핑할 필요가 없다.(자동으로 매핑이 됨.) 주소창에 twoDice.jsp를 입력하면 호출이 된다... 뭐지...? --%>
+	<%-- WEB-INF아래에 있는 jsp파일들은 매핑을 안해줘도 주소창에 *.jsp를 입력하면 호출이 되는 것 같다. --%>
 	<img src='resources/img/dice<%=idx1%>.jpg'>
 	<img src='resources/img/dice<%=idx2%>.jpg'>
 </body>
