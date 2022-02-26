@@ -128,3 +128,14 @@
 		- 그래서 session엔 최소한의 정보만 저장한다.
 	- request : 요청이 처리되는 동안만 존재.
 		- 데이터를 다른 페이지로 넘길 때 사용 (forword)
+
+**5) URL패턴**
+- @WebServlet으로 서블릿을 URL에 매핑할 때 사용
+- 우선순위
+	- 1 - 정확히 일치하는 것(exact mapping)
+	- 2 - 경로를 와일드카드로 처리(path mapping)
+	- 3 - 확장자를 적고, 파일명을 와일드카드로 처리(extension mapping)
+	- 4 - 모든 주소와 매핑이 된다(default mapping)
+
+**6) Filter**
+- 공통적인 요청(전처리, 후처리)에 사용한다. ex) 로깅, 인코딩 등
