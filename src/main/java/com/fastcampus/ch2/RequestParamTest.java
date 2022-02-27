@@ -5,9 +5,21 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+/**
+ * @RequestParam 어노테이션에 대한 공부
+ * 받는 매개변수가 String인지, int인지도 확인해보며 생각하고,
+ * required가 false인지, true인지도 보며 생각해보자.
+ * 
+ * 매개변수가 int타입이고, required가 false일 땐 defaultValue 옵션을 지정해 주어야 에러가 나지 않는다.
+ * required가 true일 땐 파라미터를 잘못넘겼을 때를 대비해 예외처리를 해주고, 클라이언트가 올바른 값을 입력하도록 해야한다.
+ * 물론 String일 때도 필요에 따라 defaultValue를 지정해주면 된다!
+ * 
+ */
 
 @Controller
 public class RequestParamTest {
