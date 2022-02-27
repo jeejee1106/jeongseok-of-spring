@@ -1,5 +1,11 @@
 ## 1. 클라이언트와 서버
 
+<details>
+<summary>클라이언트와 서버란?</summary>
+<div markdown="1">
+
+<br>
+	
 - 클라이언트(client) : 서비스를 **요청**하는 애플리케이션(컴퓨터)  
 - 서버(server) : 서비스를 **제공**하는 애플리케이션(컴퓨터)
 
@@ -30,9 +36,17 @@
 - web.xml
 : Tomcat의 공통설정 파일과 개인 설정 파일 두 개가 있다.
 
+</div>
+</details>
 
 ## 2. HTTP 요청과 응답
 
+<details>
+<summary>HTTP 요청과 응답이란?</summary>
+<div markdown="1">
+
+<br>
+	
 **프로토콜이란?**
 - 서로간의 통신을 위한 약속, 규칙. 주고 받을 데이터에 대한 형시을 정의한 것
 
@@ -58,8 +72,17 @@
     - 보안에 유리, 데이터 공유에는 불리
     - ex) 게시판에 글쓰기, 로그인, 회원가입
 
+</div>
+</details>
+
 ## 3. 관심사의 분리 (MVC 패턴)
 
+<details>
+<summary>관심사의 분리란?</summary>
+<div markdown="1">
+
+<br>
+	
 **MVC** 패턴이란?
 - **M**odel : Controller와 View 사이에서 데이터를 전달해 주는 역할을 한다.  
 - **V**iew : Controller에서 처리한 데이터를 Model을 통해 전달 받고, 이 데이터를 화면에 출력해주는 역할을 한다.  
@@ -67,7 +90,17 @@
 
 **참고 : Model은 DispatcherServlet이 생성해서 Controller에 넘겨주는데, DispatcherServlet은 뒤에서 자세하게 다룰 예정.
 
+</div>
+</details>
+
 ## 4. Servlet과 JSP
+
+<details>
+<summary>Servlet과 JSP란?</summary>
+<div markdown="1">
+
+<br>
+	
 **0) 간단 정리**
 - 역할의 차이일 뿐 기능적인 차이는 없다.(하는 일은 동일)
 - Servlet : java코드 안에 html코드
@@ -140,18 +173,45 @@
 **6) Filter**
 - 공통적인 요청(전처리, 후처리)에 사용한다. ex) 로깅, 인코딩 등
 
+</div>
+</details>
+
 ## 5. @RequestParam과 @ModelAttribute
 
-- @RequestParam
-	- 요청의 파라미터를 연결할 매개변수에 붙이는 어노테이션
-	- 기본값 : @RequestParam(name="파라미터명", required=false) 생략가능하다.
-	- @RequestParam만 쓰고 뒤에 옵션을 안붙여주면 (name="파라미터명", required=true)가 생략된 것이다.
-	- 매개변수의 타입이 String인지, int인지에 따라 생각을 조금 해봐야한다.
-		- String
-			- required= false일 때 : 파라미터를 안넘기거나 빈 문자열을 넘겨도 에러 안남. null과 ""를 자동으로 String 타입으로 바꿔주기 때문
-			- required=true일 때  : 파라미터를 안넘기면 400에러남. 꼭 넘겨야 하는데, 클라이언트가 안넘긴거라서! 빈 문자열을 넘기면 에러 안남.
-		-  int
-			
-			- required=false일 때 : 파라미터를 안넘기면 500에러난다. 필수입력이 아니라서 안넘긴긴건 클라이언트의 잘못이 아니다. 파라미터를 안넘기면 null이 들어오는데, 이 null을 int 타입으로 바꿀 수 없기 때문에 500에러가 난다.
-			그러나 빈 문자열을 넘기면 400에러가 난다. 클라이언트가 값을 넘기긴 넘겼는데 잘못 넘겼기 때문에! 역시 빈 문자열""을 int타입으로 바꿀 수 없기 때문에 에러가 나는 것. 때문에 매개변수가 int타입이고,  required가 false일 땐 defaultValue 옵션을 써서 기본값을 넘겨주어야 한다. (ex) defaultValue="1")
-			- required=true일 때 : 파라미터를 안넘기거나 빈 문자열로 넘기면 400에러가 난다. 꼭 넘겨야 하는 파라미터인데, 클라이언트가 잘못넘긴 것이므로.
+<details>
+<summary>@RequestParam과 @ModelAttribute란?</summary>
+<div markdown="1">
+
+<br>
+	
+**@RequestParam**
+- 요청의 파라미터를 연결할 매개변수에 붙이는 어노테이션
+- 기본값 : @RequestParam(name="파라미터명", required=false) 생략가능하다.
+- @RequestParam만 쓰고 뒤에 옵션을 안붙여주면 (name="파라미터명", required=true)가 생략된 것이다.
+- 매개변수의 타입이 String인지, int인지에 따라 생각을 조금 해봐야한다.
+	- String
+		- equired= false일 때 : 파라미터를 안넘기거나 빈 문자열을 넘겨도 에러 안남. null과 ""를 자동으로 String 타입으로 바꿔주기 때문
+		- required=true일 때  : 파라미터를 안넘기면 400에러남. 꼭 넘겨야 하는데, 클라이언트가 안넘긴거라서! 빈 문자열을 넘기면 에러 안남.
+	- int
+		- required=false일 때 : 파라미터를 안넘기면 500에러난다. 필수입력이 아니라서 안넘긴긴건 클라이언트의 잘못이 아니다. 파라미터를 안넘기면 null이 들어오는데, 이 null을 int 타입으로 바꿀 수 없기 때문에 500에러가 난다.
+		- 그러나 빈 문자열을 넘기면 400에러가 난다. 클라이언트가 값을 넘기긴 넘겼는데 잘못 넘겼기 때문에! 역시 빈 문자열""을 int타입으로 바꿀 수 없기 때문에 에러가 나는 것.
+		- 때문에 매개변수가 int타입이고,  required가 false일 땐 defaultValue 옵션을 써서 기본값을 넘겨주어야 한다. (ex) defaultValue="1")
+		- required=true일 때 : 파라미터를 안넘기거나 빈 문자열로 넘기면 400에러가 난다. 꼭 넘겨야 하는 파라미터인데, 클라이언트가 잘못넘긴 것이므로.
+
+**@ModelAttribute**
+- 이 어노테이션이 붙은 대상은 Model의 속성으로 자동 추가를 해준다.
+- 컨트롤러 메서드의 매개변수와 반환타입에 어노테이션을 적용할 수 있다.
+- 예를 들어 (@ModelAttribute MyDate date, Model m)을 매개변수로 받으면, m.addAttribute("myDate", date)로 모델에 key와 value를 넘기지 않아도 자동으로 추가를 해준다. key는 타입의 앞글자를 소문자로 변환한 후 저장해준다.
+- 반환타입 앞에 붙여주면, 그 메서드의 호출 결과를 Model에 저장하여 반환한다. 이 때는 key를 직접 지정해주어야하며, value에는 반환값이 들어간다.
+- 그런데 사실 컨트롤러의 매개변수가 참조형일 땐 @ModelAttribute가 생략 가능하다.
+- 그래서 위 예시에서 따로 어노테이션을 붙이지 않아도 m.addattribute를 쓰지 않아도 된다.
+
+**WebDataBinder**
+- 쿼리스트링으로 받은 문자열 value를 컨트롤러 메서드의 int타입의 매개변수로 받아야 하는 상황이 있다. 이때 중간에서 타입 변환을 해주는 애가 WebDataBinder이다.
+- WebDataBinder는 타입을 변환한 후 결과를 BindingResult에 저장한다. 변환 중 에러가 생겨도 그 에러를 BidingResult에 저장한다.
+- 타입을 변환한 후에는 데이터를 검증(Validation)한다. 이 때 또 결과나 에러를 BindingResult에 저장한다.
+- 그리고 BindingResult에 담긴 값들을 컨트롤러에 넘겨줘서 컨트롤러의  로직에 따라 처리된다.
+- BindingResult는 바인딩할 객체의 바로 뒤에 위치해야 한다.
+
+</div>
+</details>
