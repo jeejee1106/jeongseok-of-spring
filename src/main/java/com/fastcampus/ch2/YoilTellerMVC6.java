@@ -29,7 +29,9 @@ public class YoilTellerMVC6 {
 	}
 	
 	@RequestMapping("/getYoilMVC6")
-	public String main(MyDate date, BindingResult result) throws IOException {
+	public String main(MyDate date, BindingResult result) throws IOException { 
+		//매개변수가 참조형일 때 @ModelAttribute는 생략가능하기 때문에 안적어줘도 되고, @ModelAttribute덕분에 Model도 안적어줘도 된다.
+		
 		System.out.println("result = " + result);
 		//파라미터값을 똑바로 주면 500에러나고, 문자열로 줘야 yoilError페이지로 이동함.. 이제 맞나?
 

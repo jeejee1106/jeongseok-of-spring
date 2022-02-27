@@ -19,6 +19,8 @@ public class YoilTellerMVC5 {
 		return "yoilError";
 	}
 	
+	//@ModelAttribute는 MyDate를 자동으로 model에 담아주는 역할을 한다. 따라서 Model객체를 쓸 필요가 없다.
+	
 	@RequestMapping("/getYoilMVC5")
 	//public String main(@ModelAttribute("myDate") MyDate date, Model model) throws IOException { //밑 줄과 같은 의미! 생략 하면 자동으로 타입의 첫글자를 소문자로 바꿔서 key로 사용한다.
 	public String main(@ModelAttribute MyDate date, Model model) throws IOException {
@@ -29,11 +31,11 @@ public class YoilTellerMVC5 {
 		}
 		
 		//2. 처리 - 요일 계산
-//		char yoil = getYoil(date);
+//		char yoil = getYoil(date); //@ModelAttribute를 사용했기 때문에 자동으로 호출된다.
 		
 		//3. 계산한 결과를 model에 저장
 //		model.addAttribute("myDate", date);
-//		model.addAttribute("yoil", yoil);
+//		model.addAttribute("yoil", yoil); //@ModelAttribute를 사용했기 때문에 따로 model에 담아줄 필요가 없다.
 		
 		//@ModelAttribute를 이용하면 2,3번이 다 필요가 없다.
 		
@@ -46,7 +48,7 @@ public class YoilTellerMVC5 {
 		return isValid(date.getYear(), date.getMonth(), date.getDay());
 	}
 
-	private @ModelAttribute("yoil") char getYoil(MyDate date) {
+	private @ModelAttribute("yoil") char getYoil(MyDate date) { //반환타입 앞에 붙여주면 key를 꼭 적어줘야한다. ("yoil")
 		return getYoil(date.getYear(), date.getMonth(), date.getDay());
 	}
 
