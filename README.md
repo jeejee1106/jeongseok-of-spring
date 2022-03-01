@@ -215,3 +215,106 @@
 
 </div>
 </details>
+
+## 6. redirect와 forward
+
+<details>
+<summary>redirect와 forward란?</summary>
+<div markdown="1">
+
+<br>
+	
+**redirect**
+- 브라우저가 다른 URL로 재요청. mapping으로 컨트롤러가 실행되게 하고, 유효성 검사를 통과하지 못하면 redirect로 다른 매핑으로 넘겨준다. 그럼 그 다음 매핑에서 view로 넘겨주겠지???
+- 처음 요청이 GET이던 POST이던 redirect는 GET으로 재요청이 된다. 
+- 스프링에서는?
+	- 클라이언트가 요청을 하면 그 요청을 DispatcherServlet이 받고, 이 요청을 수행할 수 있는 Controller를 호출한다. 거기서 어떠한 이유(유효성 검사를 통과 못한다던가 등)로 redirect를 만나면 view이름 대신에 다른 매핑을 반환한다. Controller가 다른 매핑을 반환하면 DispatcherServlet은 이 반환값에 redirect가 들어있기 때문에 redirectView한테 전달을 한다. 그럼 redirectView는 응답 헤더를 만든다. 클라이언트는 이 응답을 받아서 아 재요청을 해야하는 구나 하고 브라우저가 응답헤더에 있는 Location경로로 재요청을 한다. 
+
+**forward**
+- 클라이언트가 요청한 것을 request객체에 담아서 다른 view로 그대로 전달
+- 클라이언트가 요청을 하면 그 요청을 DispatcherServlet이 받고, 이 요청을 수행할 수 있는 Controller를 호출한다. 거기서 어떠한 이유(유효성 검사를 통과 못한다던가 등)로 forward를 만나면 DispatcherServlet은 반환값을 InternalResourceView로 넘긴다. DispatcherServlet은 forward뒤의 매핑에 맞는 메서드를 찾아간다.
+	
+</div>
+</details>
+
+## 7. cookie와 session
+
+<details>
+<summary>cookie와 session이란?</summary>
+<div markdown="1">
+
+<br>
+	
+**cookie**
+- name과 value를 한 쌍으로 저장하는 것
+- id, domain, path, 유효기간 등도 다 저장할 수 있다.
+- 쿠키에는 아스키 문자만 가능.
+- 서버에서 생성해서 브라우저에 저장한다. -> 브라우저에 저장하는거라 사용자가 쿠키를 삭제할 수도 있고, 서버에서 발급해주는 쿠키를 거부할 수도 있다.
+- 쿠키가 여러개 있을 땐 domain, path가 일치하는 경우에만 자동 전송해준다.
+- 쿠키 생성하는 법
+	- Cookie cookie = new Cookie("name", "value"); //쿠키 생성
+	- cookie.setMaxAge(60 * 60 * 24); //유효기간은 초 단위 설정이 가능하다.
+	- response.addCookie(cookie); //응답(response)에 쿠키 추가
+- 쿠키 삭제하는 법
+	- Cookie cookie = new Cookie("name"); //변경(삭제)할 쿠키와 같은 이름의 쿠키 생성
+	- cookie.setMaxAge(0); //유효기간을 0으로 설정 -> 삭제
+	- response.addCookie(cookie); //응답(response)에 쿠키 추가
+
+**참고 : @CookieValue라는 어노테이션이 있는데, 값을 가져오고싶은 쿠키이름을 적어주면 값을 받아올 수 있다. (매개변수에 @CookieValue("JSESSIONID") String sessionId 이런식으로)
+
+**session**
+- 서로 관련된 요청들을 하나로 묶은 것 - 쿠키를 이용
+- 서버에서는 browser마다 개별 저장소(session)객체를 제공해준다. 즉, 세션은 서버에 저장! - 왜 브라우저마다 제공? 쿠키를 이용했기 때문에!(쿠키는 브라우저에 저장된다.)
+- 세션의 생성과정
+	- 처음에 브라우저가 요청을 하면 서버는 무조건 세션 객체(저장소)를 만든다.
+	- 그 세션 객체는  세션 ID를 가지고 있다.(JSESSIONID)
+	- 서버는 응답헤더에 그 세션ID를 담아서(set-Cookie) 응답을 보낸다.
+	- 그럼 브라우저에 쿠키가 저장된다.
+	- 그 다음부터는 요청을 보낼 때 마다 쿠키가 따라다닌다.
+	- 서버는 쿠키에 담긴 JSESSIONID를 보고 같은 브라우저에서 보낸 요청인지 판별한다.
+- 세션 생성하는 법
+	- HttpSession session = request.getSession(); //생성
+	- session.setAttribute("key", "value"); // 값 저장
+- 세션 종료하기
+	- HttpSession session = request.getSession();
+	- session.invalidate(); //세션을 즉시 종료 - 수동종료
+	- session.setMaxInactiveInterval(60*30) //예약 종료(초단위) - 수동종료
+	- 자동종료는 web.xml에 설정해주어야한다.
+
+|쿠키(Cookie)|세션(HttpSession)|
+|---|---|
+|브라우저에 저장|서버에 저장|
+|서버에 부담 없음|서버 부담 있음|
+|보안에 불리|보안에 유리|
+|서버 다중화에 유리|서버 다중화에 불리|
+
+**참고 : 세션은 서버에 부담이 많이 가기 때문에 세션이 필요없는 페이지에서는 세션을 꺼주는게(?) 좋다. 세션이 시작하지 않아도 되는 jsp에서 <%@ page session="false" %> 를 작성해주면 해당 페이지에서는 세션 객체를 만들지 않는다. 이 때, 다른 페이지에서 세션 객체를 생성하고 이 페이지로 넘어와도 세션은 끊기지 않는다! '생성' 만 못하게 할 뿐!
+	
+</div>
+</details>
+
+## 8. 제목
+
+<details>
+<summary>제목이란?</summary>
+<div markdown="1">
+
+<br>
+	
+내용
+	
+</div>
+</details>
+
+## 9. 제목
+
+<details>
+<summary>제목이란?</summary>
+<div markdown="1">
+
+<br>
+	
+내용
+	
+</div>
+</details>
