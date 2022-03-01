@@ -293,15 +293,63 @@
 </div>
 </details>
 
-## 8. 제목
+## 8. 예외처리하기
 
 <details>
-<summary>제목이란?</summary>
+<summary>spring에서의 예외처리</summary>
 <div markdown="1">
 
 <br>
 	
-내용
+**해당 컨트롤러에서 처리**
+- 컨트롤러에서 예외가 발생했다면 1. try-catch블럭으로 예외를 잡아주거나, 
+- 여러 예외가 반복된다면 2. 예외처리 메서드를 따로 만들어서 처리해주면 코드의 중복을 줄일 수 있다.
+- 예외처리를 하는 메서드에는 @ExceptionHandler 어노테이션을 붙여주면 된다.
+	```java
+	@ExceptionHandler({NullPointerException.class,FileNotFoundException.class}) 
+	//하나의 핸들러 메서드로 두 개 이상의 예외를 처리하고 싶을 땐 이렇게 배열로 써주면 된다.
+	public String catcher2(Exception ex, Model model) {
+		model.addAttribute("ex", ex);
+		return "error";
+	}
+	```
+
+**예외처리 클래스를 따로 만들어서 처리하기**
+- 예외처리를 할 클래스에 @ControllerAdvice("패키지") 어노테이션을 붙여주면  지정한 패키지의 예외를 모두 여기서 처리할 수 있다. 디폴트 값은 모든 패키지이다.
+- 이 클래스를 전역 예외처리 클래스 라고 한다.
+- 마찬가지로 예외처리를 할 메서드에는 @ExceptionHandler 어노테이션을 붙여준다.
+
+**참고 : 만약 예외처리 클래스를 따로 만들었는데 컨트롤러에 예외처리 메서드가 있다면, 그 컨트롤러에서 예외를 처리한다.
+
+**@ResponseStatus**
+- 응답메세지의 상태코드를 변경할 때 사용한다.
+- 디폴트 값은 500번이다. (INTERNAL_SERVER_ERROR)
+- @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED), @	ResponseStatus(HttpStatus.BAD_REQUEST) 등등
+
+**에러 페이지 꾸미기(?) - 상태 코드별 뷰 Mapping**
+- 톰캣이 만들어준 에러화면이 아니라, 내가 만든 에러페이지를 뜨게 하고 싶으면?
+- web.xml에서 jsp파일을 지정해주면 된다.
+	 ```xml
+	<!-- 에러 페이지 만들기 -->
+	<error-page>
+		<error-code>400</error-code>
+		<location>/error400.jsp</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error500.jsp</location>
+	</error-page>
+	<!-- 에러 페이지 만들기 끝 -->
+	```
+- 이 때, 지정해준 jsp파일의 경로는 src - main - webapp 이 된다.
+
+**예외처리 과정**
+- 클라이언트가 요청을 보내면 DispatcherServlet이 받아서 Controller에 넘겨준다.
+- Controller에서 예외가 발생하면 try-catch로 처리를 해주거나 떠넘겨야한다.
+- 떠넘기게 된다면 DispatcherServlet은 handlerExceptionResolvers로 등록이 되어있는 애들을 살펴본다.
+- 스프링이 제공하는 예외처리 기본전략에 의해 3개의 ExceptionResolver가 자동으로 등록되어 있다. (ExceptionHandler, ResponseStatus, DefaultHandler 이 순서대로 살펴봄)
+- 즉, 예외가 발생하면 먼저 @ExceptionHandler가 붙은 메서드를 찾아서 예외처리를 시도하고, 없다면 @ResponseStatus가 붙은 메서드를 찾아서 예외처리를 시도한다.
 	
 </div>
 </details>
