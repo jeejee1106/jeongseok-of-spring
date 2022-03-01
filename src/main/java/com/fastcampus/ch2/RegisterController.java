@@ -67,11 +67,11 @@ public class RegisterController {
 		
 //		//1. 유효성 검사
 //		if(!isValid(user)) {
-//			String msg = URLEncoder.encode("id를 잘못 입력하셨습니다.", "utf-8");
+//			String msg = URLEncoder.encode("id를 잘못 입력하셨습니다.", "utf-8"); //컨트롤러에서 직접 URL에 한글을 보내면 브라우저가 인코딩을 해줄 수 없어서 여기서 인코딩을 해주어야한다.
 //			
 ////			return "redirect:/register/add?msg=" + msg; //URL재작성(rewriting)
 //			
-//			//위 msg를 모델로 보내는 방법도 있다.
+//			//위 msg를 모델로 보내는 방법도 있다. 위 한줄고 같은 코드
 //			m.addAttribute("msg", msg);
 //			return "forward:/register/add";
 //		}

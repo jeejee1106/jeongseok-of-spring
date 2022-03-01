@@ -15,6 +15,8 @@ public class BoardController {
 	public String list(HttpServletRequest request) {
 		if(!loginCheck(request)) {
 			return "redirect:/login/login?toURL=" + request.getRequestURL(); //로그인 안했으면 로그인 화면으로 이동
+			//request.getRequestURL() -> 어느 경로에서 넘어왔는지 값이 찍히게 함.
+			///login/login 컨트롤러에 toURL도 같이 넘긴다.
 		} 
 		return "boardList"; //로그인 했으면 게시판으로 이동
 	}
