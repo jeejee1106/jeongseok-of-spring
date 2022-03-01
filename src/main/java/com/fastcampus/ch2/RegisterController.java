@@ -71,7 +71,7 @@ public class RegisterController {
 //			
 ////			return "redirect:/register/add?msg=" + msg; //URL재작성(rewriting)
 //			
-//			//위 msg를 모델로 보내는 방법도 있다. 위 한줄고 같은 코드
+//			//위 msg를 모델로 보내는 방법도 있다. 위 한줄과 같은 코드
 //			m.addAttribute("msg", msg);
 //			return "forward:/register/add";
 //		}

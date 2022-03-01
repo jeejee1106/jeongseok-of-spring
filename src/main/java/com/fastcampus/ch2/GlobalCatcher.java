@@ -23,3 +23,7 @@ public class GlobalCatcher {
 		return "error";
 	}
 }
+
+/*
+ * 만약 예외가 발생한 컨트롤러에 예외처리 메서드가 있다면, 거기서 처리를한다. 여기가지 오지 않는다.
+ * */

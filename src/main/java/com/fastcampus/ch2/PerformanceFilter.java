@@ -32,7 +32,7 @@ public class PerformanceFilter implements Filter {
 		// 3. 후처리 작업
 		HttpServletRequest req = (HttpServletRequest) request;
 		String referer = req.getHeader("referer"); //어느 경로에서 요청했는가?
-		String method = req.getMethod(); //어느 메서드로 요청했는가?
+		String method = req.getMethod(); //어떤 방법으로 요청했는가?(GET, POST 등)
 		System.out.print("[" + referer + "] -> " + method + " ["+req.getRequestURI()+"]");
 		System.out.println(" 소요시간="+(System.currentTimeMillis()-startTime)+"ms");
 		

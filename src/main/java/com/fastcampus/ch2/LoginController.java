@@ -31,7 +31,7 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
-	@PostMapping("/login") //위에 같은 URL로 매핑이 되어 있지만 방식이 GET이기 때문에 겹치기 않는다!
+	@PostMapping("/login") //위에 같은 URL로 매핑이 되어 있지만 방식이 GET이기 때문에 겹치지 않는다!
 	public String login(String id, String pwd, String toURL, boolean rememberId, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//1. id와 pwd를 확인

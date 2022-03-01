@@ -22,11 +22,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<!-- <view-controller path="/register/add" view-name="registerForm"/>  -->
-	
+	<!-- <view-controller path="/register/add" view-name="registerForm"/> 에러 종류 별 view Mapping하기 (이 때 view의 경로는 views폴더 아래) -->
 	<context:component-scan base-package="com.fastcampus.ch2" />
-	
-	
 	
 	<beans:bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<beans:property name="defaultErrorView" value="error"/>
@@ -41,8 +38,7 @@
 			</beans:props>
 		</beans:property>
   	</beans:bean>
-	
-	
+	<!-- end -->
 	
 	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<beans:property name="basenames">

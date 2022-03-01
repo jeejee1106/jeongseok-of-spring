@@ -58,7 +58,7 @@
     </style>
 </head>
 <body>
-	<!-- c태그의 url은 쿠키를 허용하지 않을 떄를 대비해 쿠키를 만드는 역할을 한다!!!!!! -->
+	<!-- c태그의 url은 쿠키를 허용하지 않을 때를 대비해 쿠키를 만드는 역할을 한다!!!!!! -->
     <form action="<c:url value='/login/login'/>" method="post" onsubmit="return formCheck(this);">
         <h3 id="title">Login</h3>
         <div id="msg">
