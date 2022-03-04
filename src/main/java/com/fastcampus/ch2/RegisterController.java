@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.StringArrayPropertyEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,12 +20,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/register")
 public class RegisterController {
 	
-	@InitBinder
+	@InitBinder //해당 컨트롤러 내에서만 적용이 된다.
 	public void toDate(WebDataBinder binder) {
-//		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd"); //User클래스의 필드에 @DateTimeFormat를 사용할 수도 있다.
 //		binder.registerCustomEditor(Date.class, new CustomDateEditor(df, false));
 		
 		binder.registerCustomEditor(String[].class, new StringArrayPropertyEditor("#")); //스프링이 제공하는 기능. 문자열 잘라서 배열에 넣기
+//		binder.registerCustomEditor(String[].class, "hobby", new StringArrayPropertyEditor("#")); //이렇게 특정 필드에만 적용할 수도 있다.
 		
 		binder.setValidator(new UserValidator()); //UserValidator를 WebDataBinder의 로컬 validator로 등록 - 자동 검증을 위해??
 		
