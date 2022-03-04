@@ -354,15 +354,37 @@
 </div>
 </details>
 
-## 9. 제목
+## 9. DispatcherServlet
 
 <details>
-<summary>제목이란?</summary>
+<summary>DispatcherServlet이란?</summary>
 <div markdown="1">
 
 <br>
 	
-내용
+- DispatcherServlet
+	- DispatcherServletd이 Controller를 호출 할 때 중간에 HandlerAdapter가 있어서 느슨한 결합을 해준다.
+	- DispatcherServlet은 Controller에서 반환받은 반환값(view)을 가지고InternalResourceViewResolver를 호출하여 view에 접두사, 접미사를 붙여준다.
+	- 그렇게 완성된 view의 풀네임(?)을 다시 받아서 Model에 담긴 데이터를 view에 넘겨준다.
+	- 아직 잘 모르겠다... 더 공부하자
+	
+</div>
+</details>
+	
+## 10. 10. 데이터의 변환과 검증
+
+<details>
+<summary>10. 데이터의 변환과 검증이란?</summary>
+<div markdown="1">
+
+<br>
+	
+- @InitBinder
+	- 해당 Controller로 들어오는 요청에 대해 **타입을 변환**하거나, **데이터 검증**을 하고 싶을 때 사용할 수 있다.
+	-   또한 모든 요청 전에 InitBinder를 선언한 메소드가 실행된다.
+	- 매개변수로는 WebDataBinder를 받는다.
+	- 특정 컨트롤러 내에서 변환하려면 메서드에 이 어노테이션을 붙이면 되고, 모든 컨트롤러에서 변환하려면 WebBindingInitializer를 구현하면 된다.
+	- 이것도 잘 모르겠다.. 몇 번 더 반복해서 들어야겠다.
 	
 </div>
 </details>
